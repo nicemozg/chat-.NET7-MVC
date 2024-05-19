@@ -1,0 +1,99 @@
+@model Chat.ViewModels.Account.RegisterViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+@{
+    if (ViewBag.Error is not null)
+    {
+        <h3 class="text-danger">@ViewBag.Error</h3>
+    }
+    else
+    {
+        <h2>Регистрация нового пользователя</h2>
+    }
+}
+
+
+<form method="post" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div>
+        <label asp-for="UserName"></label><br/>
+        <input asp-for="UserName"/>
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Email"></label><br/>
+        <input asp-for="Email"/>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label><br/>
+        <input asp-for="Password" id="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+        <span class="password-toggle" id="password-toggle" onclick="togglePasswordVisibility()"><i class="fa fa-eye"></i></span>
+    </div>
+
+
+    <div>
+        <label asp-for="PasswordConfirm"></label><br/>
+        <input asp-for="PasswordConfirm" id="password-confirm" />
+        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+        <span class="password-toggle" id="password-confirm-toggle" onclick="togglePasswordConfirmVisibility()"><i class="fa fa-eye"></i></span>
+    </div>
+
+    
+    <div>
+        <label asp-for="DateOfBirth"></label><br/>
+        <input asp-for="DateOfBirth" type="date">
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+    
+    <div>
+        <label asp-for="AvatarFile"></label><br/>
+        <input asp-for="AvatarFile" type="file" id="AvatarFile">
+        <span asp-validation-for="AvatarFile" class="text-danger"></span>
+    </div>
+    <div>
+        <input class="btn btn-success mt-2" type="submit" value="Регистрация"/>
+    </div>
+</form>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        function togglePasswordVisibility() {
+                var passwordInput = $("#password");
+                var passwordToggle = $("#password-toggle");
+        
+                if (passwordInput.attr("type") === "password") {
+                    passwordInput.attr("type", "text");
+                    passwordToggle.html('<i class="fa fa-eye-slash"></i>');
+                } else {
+                    passwordInput.attr("type", "password");
+                    passwordToggle.html('<i class="fa fa-eye"></i>');
+                }
+            }
+        
+            function togglePasswordConfirmVisibility() {
+                var passwordConfirmInput = $("#password-confirm");
+                var passwordConfirmToggle = $("#password-confirm-toggle");
+        
+                if (passwordConfirmInput.attr("type") === "password") {
+                    passwordConfirmInput.attr("type", "text");
+                    passwordConfirmToggle.html('<i class="fa fa-eye-slash"></i>');
+                } else {
+                    passwordConfirmInput.attr("type", "password");
+                    passwordConfirmToggle.html('<i class="fa fa-eye"></i>');
+                }
+            }
+    </script>
+
+}

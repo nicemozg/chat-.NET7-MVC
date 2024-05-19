@@ -1,0 +1,19 @@
+@model ChatRoom
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+
+<form asp-action="AddChat" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Название чата:</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Создать чат</button>
+</form>
+

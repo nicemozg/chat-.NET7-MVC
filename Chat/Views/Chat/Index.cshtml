@@ -1,0 +1,22 @@
+@model List<ChatRoom>
+
+@{
+    ViewBag.Title = "Список чатов";
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    @foreach (var chat in Model)
+    {
+        <li>
+            <div>
+                @chat.Name
+                <form method="post" asp-action="JoinChat" asp-route-chatId="@chat.Id">
+                    <button type="submit" class="btn btn-primary">Войти в чат</button>
+                </form>
+            </div>
+        </li>
+    }
+</ul>

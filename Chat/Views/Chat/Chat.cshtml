@@ -1,0 +1,27 @@
+@model Chat.ViewModels.ChatViewModel
+
+@{
+    ViewBag.Title = "Чат: " + Model.Chat.Name;
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Сообщения в чате:</h3>
+<ul>
+    @foreach (var message in Model.Messages)
+    {
+        <li>
+            <strong>@message.UserName:</strong> @message.Text
+        </li>
+    }
+</ul>
+
+<form method="post" asp-action="SendMessage">
+    <input type="hidden" asp-for="Chat.Id" />
+    <div class="form-group">
+        <input asp-for="NewMessage.Text" class="form-control" placeholder="Введите ваше сообщение" />
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+

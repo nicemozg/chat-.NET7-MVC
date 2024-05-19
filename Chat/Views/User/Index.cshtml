@@ -1,0 +1,24 @@
+@model Chat.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "Просмотр профиля";
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="user-profile">
+    <div class="user-avatar">
+        <img src="/avatars/@Model.AvatarFileName" alt="User Avatar" class="profile-avatar"/>
+    </div>
+    <div class="user-info">
+        <p><strong>Имя пользователя:</strong> @Model.UserName</p>
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Дата рождения:</strong> @Model.DateOfBirth.ToShortDateString()</p>
+        <a asp-action="Edit" class="btn btn-success">Редактирование</a>
+        <a asp-action="AddChat" asp-controller="Chat" class="btn btn-primary">Создать чат</a>
+        <a asp-action="Index" asp-controller="Chat" class="btn btn-dark">Список чатов</a>
+
+    </div>
+</div>
+

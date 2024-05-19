@@ -1,0 +1,44 @@
+@model Chat.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "Редактирование профиля";
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="/avatars/@Model.AvatarFileName" alt="@Model.AvatarFileName"
+                 class="img-fluid rounded-circle avatar-image">
+        </div>
+        
+        <form method="post" asp-action="Edit" asp-controller="User" enctype="multipart/form-data">
+            
+            <input asp-for="Id" value="@Model.Id" type="hidden"/>
+            <div class="form-group">
+                <label for="name">Логин:</label>
+                <input asp-for="UserName" type="text" class="form-control" id="name" name="UserName" value="@Model.UserName">
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Электронная почта:</label>
+                <input asp-for="Email" type="text" class="form-control" id="name" name="Email" value="@Model.Email">
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="DateOfBirth"></label><br/>
+                <input asp-for="DateOfBirth" type="date">
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="photo">Загрузить новое фото:</label>
+                <input asp-for="AvatarFile" type="file" class="form-control-file" id="photo" name="AvatarFile">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+</div>
